@@ -1,7 +1,3 @@
-import sys
-import math
-
-		
 def convertToDecimal(x,y,z):
 	return 81 * (x-1) + 9 * (y-1)+z
 	
