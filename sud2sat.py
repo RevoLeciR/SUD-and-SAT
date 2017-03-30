@@ -30,15 +30,44 @@ def eachNumberAppearsAtMostOncePerGrid():
 				for x in range(1,4):
 					for y in range(1,4):
 						for k in range(y+1,4):
-							print "-%s -%s" %(convertToDecimal(3*i+x,3*j+y,z), convertToDecimal(3*i+z,3*j+k,z))
+							print "-%s -%s" %(convertToDecimal(3*i+x,3*j+y,z), convertToDecimal(3*i+x,3*j+k,z))
 							for l in range(1,4):
 								print "-%s -%s" %(convertToDecimal(3*i+x,3*j+y,z), convertToDecimal(3*i+k,3*j+l,z))
 			
+
+def testNumber():
+	q = 0
+	for x in range(1,10):
+		for y in range(1,10):
+			q+=1
+	for y in range(1,10):
+		for z in range(1,10):
+			for x in range(1,9):
+				for i in range(x+1,10):
+					q+=1
+	for x in range(1,10):
+		for z in range(1,10):
+			for y in range(1,9):
+				for i in range(y+1,10):
+					q+=1
+	for z in range(1,10):
+		for i in range(0,3):
+			for j in range(0,3):
+				for x in range(1,4):
+					for y in range(1,4):
+						for k in range(y+1,4):
+							q+=1
+							for l in range(1,4):
+								q+=1
+	print q	
+
+
 def main():
+	#testNumber()
 	eachElementHasAtLeastOneNumber()	
 	eachRowHasAtMostOneOfEachNumber()	
 	eachColumnHasAtMostOneOfEachNumber()
-	eachNumberAppearsAtMostOncePerGrid()	
+	eachNumberAppearsAtMostOncePerGrid()
 		
 if __name__ == "__main__":
 	main() 
