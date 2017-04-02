@@ -1,7 +1,6 @@
 import sys
 import math
 
-
 def solvePuzzle(size, sat):
 	satExpressions = sat
 	
@@ -16,26 +15,41 @@ def solvePuzzle(size, sat):
 	
 	#while there are still expressions left
 	#while len(satExpressions) > 0:
-	for x in satExpressions:
-		if len(x) == 1:
-			if x[0] == '-':
-				truths[int(x[0][1:])] = False
-				#print '%s' %(int(x[1:]))
-			else:
-				truths[int(x[0])] = True
-				#print '%s' %(x)
-			satExpressions.remove(x)
 	
 	
-	print truths
+	while len(satExpressions) > 53:
 	
-	#print satExpressions
-			#else:
-				#for y in x:
+		secondArray = []
+	
+		for x in satExpressions:
+			if len(x) == 1:
+				if x[0][0] == '-':
+					truths[int(x[0][1:])] = False
+				else:
+					truths[int(x[0])] = True
+			elif len(x) > 1:
+				subArray = []
+				copy = True
+				for y in x:
+					if y[0] == '-':
+						if(truths[int(y[1:])] != True):
+							subArray.append(y)
+						if(truths[int(y[1:])] == False):
+							copy = False
+							
+					else:
+						if(truths[int(y)] != False):
+							subArray.append(y)
+						if(truths[int(y)] == True):
+							copy == False
 					
-				#loop through the array and remove false expressions
-				
-				#the expression must evaluate to true
+				#remove everything that must evaluate to false
+				#delete every row that has anything that evaluates to true
+				if(copy == True):
+					secondArray.append(subArray)
+		satExpressions = secondArray
+		print len(satExpressions)
+		print truths
 				
 			
 	
@@ -61,13 +75,13 @@ def main():
 				boardSize = int(x[12])
 				if(sat!= []):
 					print ('next puzzle')
-					print (solvePuzzle(boardSize,sat))
+					solvePuzzle(boardSize,sat)
 					sat = []
 			else:
 				sat.append(x)
 		if sat != []:
 			print ('next puzzle')
-			print (solvePuzzle(boardSize,sat))
+			solvePuzzle(boardSize,sat)
 		
 if __name__ == "__main__":
 	main() 
