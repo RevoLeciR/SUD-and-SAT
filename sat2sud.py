@@ -10,9 +10,6 @@ def solvePuzzle(size, sat):
 	for x in range(len(satExpressions)):
 		satExpressions[x] = satExpressions[x].split(' ')
 	
-	
-	
-	
 	#while there are still expressions left
 	#while len(satExpressions) > 0:
 	
@@ -36,23 +33,16 @@ def solvePuzzle(size, sat):
 							subArray.append(y)
 						if(truths[int(y[1:])] == False):
 							copy = False
-							
 					else:
 						if(truths[int(y)] != False):
 							subArray.append(y)
 						if(truths[int(y)] == True):
 							copy == False
-					
-				#remove everything that must evaluate to false
-				#delete every row that has anything that evaluates to true
 				if(copy == True):
 					secondArray.append(subArray)
 		satExpressions = secondArray
 		print len(satExpressions)
 		print truths
-				
-			
-	
 
 def main():
 	if len(sys.argv) == 1:
