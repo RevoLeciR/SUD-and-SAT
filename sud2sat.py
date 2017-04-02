@@ -12,12 +12,16 @@ def eachElementHasAtLeastOneNumber(columnNumber, outputGrid):
 		for y in range(1,columnNumber+1):
 			list = ""
 			occurence = False
+			first = True
 			for z in range(1,columnNumber+1):
 				if(returnValueAt(x,y,outputGrid) != z and occurence == False):
 					#actually dont bother printing this out in that case
-					list += "%s " %(convertToDecimal(x,y,z))
+					if first == False:
+						list += ' '
+					first = False
+					list += "%s" %(convertToDecimal(x,y,z))
 				elif occurence == False:
-					list = "%s " %(convertToDecimal(x,y,z))
+					list = "%s" %(convertToDecimal(x,y,z))
 					occurence = True
 			print list
 		
@@ -27,10 +31,14 @@ def eachRowHasAtMostOneOfEachNumber(columnNumber, outputGrid):
 			for x in range(1,columnNumber):
 				for i in range(x+1,columnNumber+1):
 					string = ""
+					first = True
 					if (returnValueAt(x,y,outputGrid) != z):
-						string += "-%s " %(convertToDecimal(x,y,z))
+						string += "-%s" %(convertToDecimal(x,y,z))
+						first = False
 					if (returnValueAt(i,y,outputGrid) != z):
-						string += "-%s " %(convertToDecimal(i,y,z))
+						if first == False:
+							string += ' '
+						string += "-%s" %(convertToDecimal(i,y,z))
 					if(string != ""):
 						print string
 			
@@ -40,10 +48,14 @@ def eachColumnHasAtMostOneOfEachNumber(columnNumber, outputGrid):
 			for y in range(1,columnNumber):
 				for i in range(y+1,columnNumber+1):
 					string = ""
+					first = True
 					if (returnValueAt(x,y,outputGrid) != z):
-						string += "-%s " %(convertToDecimal(x,y,z))
+						first = False
+						string += "-%s" %(convertToDecimal(x,y,z))
 					if (returnValueAt(x,i,outputGrid) != z):
-						string += "-%s " %(convertToDecimal(x,i,z))
+						if first == False:
+							string += ' '
+						string += "-%s" %(convertToDecimal(x,i,z))
 					if(string != ""):
 						print string
 			
@@ -55,18 +67,26 @@ def eachNumberAppearsAtMostOncePerGrid(columnNumber, outputGrid):
 					for y in range(1,int(math.sqrt(columnNumber)+1)):
 						for k in range(y+1,int(math.sqrt(columnNumber)+1)):
 							string = ""
+							first = True
 							if (returnValueAt(int(math.sqrt(columnNumber))*i+x,int(math.sqrt(columnNumber))*j+y,outputGrid) != z):
-								string += "-%s " %(convertToDecimal(int(math.sqrt(columnNumber))*i+x,int(math.sqrt(columnNumber))*j+y,z))
+								first = False
+								string += "-%s" %(convertToDecimal(int(math.sqrt(columnNumber))*i+x,int(math.sqrt(columnNumber))*j+y,z))
 							if (returnValueAt(int(math.sqrt(columnNumber))*i+x,int(math.sqrt(columnNumber))*j+k,outputGrid) != z):
-								string += "-%s " %(convertToDecimal(int(math.sqrt(columnNumber))*i+x,int(math.sqrt(columnNumber))*j+k,z))
+								if first == False:
+									string += ' '
+								string += "-%s" %(convertToDecimal(int(math.sqrt(columnNumber))*i+x,int(math.sqrt(columnNumber))*j+k,z))
 							if(string != ""):
 								print string
 							for l in range(1,int(math.sqrt(columnNumber))+1):
 								string = ""
+								first = True
 								if (returnValueAt(int(math.sqrt(columnNumber))*i+x,int(math.sqrt(columnNumber))*j+y,outputGrid) != z):
-									string += "-%s " %(convertToDecimal(int(math.sqrt(columnNumber))*i+x,int(math.sqrt(columnNumber))*j+y,z))
+									first = False
+									string += "-%s" %(convertToDecimal(int(math.sqrt(columnNumber))*i+x,int(math.sqrt(columnNumber))*j+y,z))
 								if (returnValueAt(int(math.sqrt(columnNumber))*i+k,int(math.sqrt(columnNumber))*j+l,outputGrid) != z):
-									string += "-%s " %(convertToDecimal(int(math.sqrt(columnNumber))*i+k,int(math.sqrt(columnNumber))*j+l,z))
+									if first == False:
+										string += ' '
+									string += "-%s" %(convertToDecimal(int(math.sqrt(columnNumber))*i+k,int(math.sqrt(columnNumber))*j+l,z))
 								if(string != ""):
 									print string
 
@@ -86,10 +106,11 @@ def main():
 			inputGrid = sys.argv[1]
 		columnNumber = 0
 		outputGrid = []
+		puzzleNumber = 0
 		for x in inputGrid.splitlines():
 			if x.startswith('Grid'):
 				if(columnNumber != 0):	#not the beginning of the file
-					print "next puzzle: "
+					print "new puzzle, %s*%s" %(columnNumber,columnNumber)
 					eachElementHasAtLeastOneNumber(columnNumber, outputGrid)	
 					eachRowHasAtMostOneOfEachNumber(columnNumber, outputGrid)	
 					eachColumnHasAtMostOneOfEachNumber(columnNumber, outputGrid)
@@ -103,7 +124,7 @@ def main():
 				outputGrid.append(x)
 				columnNumber += 1
 		if columnNumber != 0:
-			print "next puzzle: "
+			print "new puzzle, %s*%s" %(columnNumber,columnNumber)
 			eachElementHasAtLeastOneNumber(columnNumber, outputGrid)	
 			eachRowHasAtMostOneOfEachNumber(columnNumber, outputGrid)	
 			eachColumnHasAtMostOneOfEachNumber(columnNumber, outputGrid)
