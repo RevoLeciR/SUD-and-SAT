@@ -24,7 +24,9 @@ def solvePuzzle(size, sat):
 			else:
 				truths[int(x[0])] = True
 				#print '%s' %(x)
-		satExpressions.remove(x)
+			satExpressions.remove(x)
+	
+	
 	print truths
 	
 	#print satExpressions
