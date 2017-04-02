@@ -42,7 +42,27 @@ def solvePuzzle(size, sat):
 					secondArray.append(subArray)
 		satExpressions = secondArray
 		print len(satExpressions)
-		print truths
+		#print truths
+	
+	print truths
+	print len(truths)
+	
+	board = []
+	
+	for a in range(9):
+		board.append([])
+		for b in range(9):
+			board[a].append(0)
+			
+	for a in range(1, len(truths)):
+		if truths[a] == True:
+			x = int((a-1)/81)
+			y= int((a-1 - x*81)/9)
+			z = a-x*81-9*y
+			board[x][y] = z
+			
+	for a in range(9):
+		print board[a]
 
 def main():
 	if len(sys.argv) == 1:
