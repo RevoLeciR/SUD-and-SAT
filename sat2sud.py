@@ -14,7 +14,8 @@ def solvePuzzle(size, sat):
 	#while len(satExpressions) > 0:
 	
 	
-	while len(satExpressions) > 53:
+	#while len(satExpressions) > 2069:
+	for w in range(100):
 	
 		secondArray = []
 	
@@ -41,11 +42,11 @@ def solvePuzzle(size, sat):
 				if(copy == True):
 					secondArray.append(subArray)
 		satExpressions = secondArray
-		print len(satExpressions)
+		#print len(satExpressions)
 		#print truths
 	
-	print truths
-	print len(truths)
+	#print truths
+	#print len(truths)
 	
 	board = []
 	
