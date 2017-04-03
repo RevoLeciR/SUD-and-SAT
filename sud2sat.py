@@ -4,8 +4,8 @@ import math
 def returnValueAt(row, column, grid):
 	return int(grid[column-1][row-1])
 
-def convertToDecimal(x,y,z):
-	return 81 * (x-1) + 9 * (y-1)+z
+def convertToDecimal(x,y,z, size):
+	return size**2 * (x-1) + size * (y-1)+z
 	
 def eachElementHasAtLeastOneNumber(columnNumber, outputGrid):
 	for x in range(1,columnNumber+1):
@@ -19,9 +19,9 @@ def eachElementHasAtLeastOneNumber(columnNumber, outputGrid):
 					if first == False:
 						list += ' '
 					first = False
-					list += "%s" %(convertToDecimal(x,y,z))
+					list += "%s" %(convertToDecimal(x,y,z, columnNumber))
 				elif occurence == False:
-					list = "%s" %(convertToDecimal(x,y,z))
+					list = "%s" %(convertToDecimal(x,y,z, columnNumber))
 					occurence = True
 			print list
 		
@@ -33,12 +33,12 @@ def eachRowHasAtMostOneOfEachNumber(columnNumber, outputGrid):
 					string = ""
 					first = True
 					if (returnValueAt(x,y,outputGrid) != z):
-						string += "-%s" %(convertToDecimal(x,y,z))
+						string += "-%s" %(convertToDecimal(x,y,z, columnNumber))
 						first = False
 					if (returnValueAt(i,y,outputGrid) != z):
 						if first == False:
 							string += ' '
-						string += "-%s" %(convertToDecimal(i,y,z))
+						string += "-%s" %(convertToDecimal(i,y,z, columnNumber))
 					if(string != ""):
 						print string
 			
@@ -51,11 +51,11 @@ def eachColumnHasAtMostOneOfEachNumber(columnNumber, outputGrid):
 					first = True
 					if (returnValueAt(x,y,outputGrid) != z):
 						first = False
-						string += "-%s" %(convertToDecimal(x,y,z))
+						string += "-%s" %(convertToDecimal(x,y,z, columnNumber))
 					if (returnValueAt(x,i,outputGrid) != z):
 						if first == False:
 							string += ' '
-						string += "-%s" %(convertToDecimal(x,i,z))
+						string += "-%s" %(convertToDecimal(x,i,z, columnNumber))
 					if(string != ""):
 						print string
 			
@@ -70,11 +70,11 @@ def eachNumberAppearsAtMostOncePerGrid(columnNumber, outputGrid):
 							first = True
 							if (returnValueAt(int(math.sqrt(columnNumber))*i+x,int(math.sqrt(columnNumber))*j+y,outputGrid) != z):
 								first = False
-								string += "-%s" %(convertToDecimal(int(math.sqrt(columnNumber))*i+x,int(math.sqrt(columnNumber))*j+y,z))
+								string += "-%s" %(convertToDecimal(int(math.sqrt(columnNumber))*i+x,int(math.sqrt(columnNumber))*j+y,z, columnNumber))
 							if (returnValueAt(int(math.sqrt(columnNumber))*i+x,int(math.sqrt(columnNumber))*j+k,outputGrid) != z):
 								if first == False:
 									string += ' '
-								string += "-%s" %(convertToDecimal(int(math.sqrt(columnNumber))*i+x,int(math.sqrt(columnNumber))*j+k,z))
+								string += "-%s" %(convertToDecimal(int(math.sqrt(columnNumber))*i+x,int(math.sqrt(columnNumber))*j+k,z, columnNumber))
 							if(string != ""):
 								print string
 							for l in range(1,int(math.sqrt(columnNumber))+1):
@@ -82,11 +82,11 @@ def eachNumberAppearsAtMostOncePerGrid(columnNumber, outputGrid):
 								first = True
 								if (returnValueAt(int(math.sqrt(columnNumber))*i+x,int(math.sqrt(columnNumber))*j+y,outputGrid) != z):
 									first = False
-									string += "-%s" %(convertToDecimal(int(math.sqrt(columnNumber))*i+x,int(math.sqrt(columnNumber))*j+y,z))
+									string += "-%s" %(convertToDecimal(int(math.sqrt(columnNumber))*i+x,int(math.sqrt(columnNumber))*j+y,z, columnNumber))
 								if (returnValueAt(int(math.sqrt(columnNumber))*i+k,int(math.sqrt(columnNumber))*j+l,outputGrid) != z):
 									if first == False:
 										string += ' '
-									string += "-%s" %(convertToDecimal(int(math.sqrt(columnNumber))*i+k,int(math.sqrt(columnNumber))*j+l,z))
+									string += "-%s" %(convertToDecimal(int(math.sqrt(columnNumber))*i+k,int(math.sqrt(columnNumber))*j+l,z, columnNumber))
 								if(string != ""):
 									print string
 
