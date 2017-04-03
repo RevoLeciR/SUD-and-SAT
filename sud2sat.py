@@ -50,6 +50,51 @@ def eachNumberAppearsAtMostOncePerGrid(columnNumber, outputGrid):
 							for l in range(1,int(math.sqrt(columnNumber))+1):
 								print "-%s -%s"%(convertToDecimal(int(math.sqrt(columnNumber))*i+x,int(math.sqrt(columnNumber))*j+y,z, columnNumber), convertToDecimal(int(math.sqrt(columnNumber))*i+k,int(math.sqrt(columnNumber))*j+l,z, columnNumber))
 
+def atMostOneNumberInEachEntry(columnNumber, outputGrid):
+	for x in range(1,columnNumber+1):
+		for y in range(1,columnNumber+1):
+			for z in range(1,columnNumber):
+				for i in range(z+1,columnNumber+1):
+					print "-%s -%s" %(convertToDecimal(x,y,z, columnNumber), convertToDecimal(x,y,i, columnNumber))
+					
+def eachNumberOncePerRow(columnNumber, outputGrid):
+	for y in range(1,columnNumber+1):
+		for z in range(1,columnNumber+1):
+			list = ""
+			first = True
+			for x in range(1,columnNumber+1):
+				if first == False:
+					list += ' '
+				first = False
+				list += "%s" %(convertToDecimal(x,y,z, columnNumber))
+			print list
+			
+def eachNumberOncePerColumn(columnNumber, outputGrid):
+	for x in range(1,columnNumber+1):
+		for z in range(1,columnNumber+1):
+			list = ""
+			first = True
+			for y in range(1,columnNumber+1):
+				if first == False:
+					list += ' '
+				first = False
+				list += "%s" %(convertToDecimal(x,y,z, columnNumber))
+			print list
+			
+def eachNumberOncePerGrid(columnNumber, outputGrid):
+	for z in range(1,columnNumber+1):
+		list = ""
+		first = True
+		for i in range(0,int(math.sqrt(columnNumber))):
+			for j in range(0,int(math.sqrt(columnNumber))):
+				for x in range(1,int(math.sqrt(columnNumber))+1):
+					for y in range(1,int(math.sqrt(columnNumber))+1):
+						if first == False:
+							list += ' '
+						first = False
+						list += "%s" %(convertToDecimal(int(math.sqrt(columnNumber))*i+x,int(math.sqrt(columnNumber))*j+y,z, columnNumber))
+		print list
+
 
 def main():
 	
@@ -75,6 +120,10 @@ def main():
 					eachRowHasAtMostOneOfEachNumber(columnNumber, outputGrid)	
 					eachColumnHasAtMostOneOfEachNumber(columnNumber, outputGrid)
 					eachNumberAppearsAtMostOncePerGrid(columnNumber, outputGrid)
+					atMostOneNumberInEachEntry(columnNumber, outputGrid)
+					eachNumberOncePerRow(columnNumber, outputGrid)
+					eachNumberOncePerColumn(columnNumber, outputGrid)
+					eachNumberOncePerGrid(columnNumber, outputGrid)
 					
 					
 					outputGrid = []
@@ -89,6 +138,10 @@ def main():
 			eachRowHasAtMostOneOfEachNumber(columnNumber, outputGrid)	
 			eachColumnHasAtMostOneOfEachNumber(columnNumber, outputGrid)
 			eachNumberAppearsAtMostOncePerGrid(columnNumber, outputGrid)
+			atMostOneNumberInEachEntry(columnNumber, outputGrid)
+			eachNumberOncePerRow(columnNumber, outputGrid)
+			eachNumberOncePerColumn(columnNumber, outputGrid)
+			eachNumberOncePerGrid(columnNumber, outputGrid)
 		
 if __name__ == "__main__":
 	main() 
