@@ -16,28 +16,6 @@ def solvePuzzle(size, sat):
 	
 	#while len(satExpressions) > 2069:
 	for w in range(100):
-	
-	
-# 		board = []
-# 	
-# 		for a in range(size):
-# 			board.append([])
-# 			for b in range(size):
-# 				board[a].append(0)
-# 			
-# 		for a in range(1, len(truths)):
-# 			if truths[a] == True:
-# 				x = int((a-1)/size**2)
-# 				y= int((a-1 - x*size**2)/size)
-# 				z = a-x*size**2-size*y
-# 				board[y][x] = z
-# 			
-# 		for a in range(size):
-# 			print board[a]
-	
-	
-	
-	
 		secondArray = []
 	
 		for x in satExpressions:
@@ -59,7 +37,7 @@ def solvePuzzle(size, sat):
 						if(truths[int(y)] != False):
 							subArray.append(y)
 						if(truths[int(y)] == True):
-							copy == False
+							copy = False
 				if(copy == True):
 					secondArray.append(subArray)
 		satExpressions = secondArray

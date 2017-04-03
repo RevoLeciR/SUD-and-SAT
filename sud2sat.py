@@ -30,34 +30,14 @@ def eachRowHasAtMostOneOfEachNumber(columnNumber, outputGrid):
 		for z in range(1,columnNumber+1):
 			for x in range(1,columnNumber):
 				for i in range(x+1,columnNumber+1):
-					string = ""
-					first = True
-					if (returnValueAt(x,y,outputGrid) != z):
-						string += "-%s" %(convertToDecimal(x,y,z, columnNumber))
-						first = False
-					if (returnValueAt(i,y,outputGrid) != z):
-						if first == False:
-							string += ' '
-						string += "-%s" %(convertToDecimal(i,y,z, columnNumber))
-					if(string != ""):
-						print string
+					print "-%s -%s" %(convertToDecimal(x,y,z, columnNumber),convertToDecimal(i,y,z, columnNumber))
 			
 def eachColumnHasAtMostOneOfEachNumber(columnNumber, outputGrid):
 	for x in range(1,columnNumber+1):
 		for z in range(1,columnNumber+1):
 			for y in range(1,columnNumber):
 				for i in range(y+1,columnNumber+1):
-					string = ""
-					first = True
-					if (returnValueAt(x,y,outputGrid) != z):
-						first = False
-						string += "-%s" %(convertToDecimal(x,y,z, columnNumber))
-					if (returnValueAt(x,i,outputGrid) != z):
-						if first == False:
-							string += ' '
-						string += "-%s" %(convertToDecimal(x,i,z, columnNumber))
-					if(string != ""):
-						print string
+					print "-%s -%s" %(convertToDecimal(x,y,z, columnNumber), convertToDecimal(x,i,z, columnNumber))
 			
 def eachNumberAppearsAtMostOncePerGrid(columnNumber, outputGrid):
 	for z in range(1,columnNumber+1):
@@ -66,29 +46,9 @@ def eachNumberAppearsAtMostOncePerGrid(columnNumber, outputGrid):
 				for x in range(1,int(math.sqrt(columnNumber)+1)):
 					for y in range(1,int(math.sqrt(columnNumber)+1)):
 						for k in range(y+1,int(math.sqrt(columnNumber)+1)):
-							string = ""
-							first = True
-							if (returnValueAt(int(math.sqrt(columnNumber))*i+x,int(math.sqrt(columnNumber))*j+y,outputGrid) != z):
-								first = False
-								string += "-%s" %(convertToDecimal(int(math.sqrt(columnNumber))*i+x,int(math.sqrt(columnNumber))*j+y,z, columnNumber))
-							if (returnValueAt(int(math.sqrt(columnNumber))*i+x,int(math.sqrt(columnNumber))*j+k,outputGrid) != z):
-								if first == False:
-									string += ' '
-								string += "-%s" %(convertToDecimal(int(math.sqrt(columnNumber))*i+x,int(math.sqrt(columnNumber))*j+k,z, columnNumber))
-							if(string != ""):
-								print string
+							print "-%s -%s"%(convertToDecimal(int(math.sqrt(columnNumber))*i+x,int(math.sqrt(columnNumber))*j+y,z, columnNumber), convertToDecimal(int(math.sqrt(columnNumber))*i+x,int(math.sqrt(columnNumber))*j+k,z, columnNumber))
 							for l in range(1,int(math.sqrt(columnNumber))+1):
-								string = ""
-								first = True
-								if (returnValueAt(int(math.sqrt(columnNumber))*i+x,int(math.sqrt(columnNumber))*j+y,outputGrid) != z):
-									first = False
-									string += "-%s" %(convertToDecimal(int(math.sqrt(columnNumber))*i+x,int(math.sqrt(columnNumber))*j+y,z, columnNumber))
-								if (returnValueAt(int(math.sqrt(columnNumber))*i+k,int(math.sqrt(columnNumber))*j+l,outputGrid) != z):
-									if first == False:
-										string += ' '
-									string += "-%s" %(convertToDecimal(int(math.sqrt(columnNumber))*i+k,int(math.sqrt(columnNumber))*j+l,z, columnNumber))
-								if(string != ""):
-									print string
+								print "-%s -%s"%(convertToDecimal(int(math.sqrt(columnNumber))*i+x,int(math.sqrt(columnNumber))*j+y,z, columnNumber), convertToDecimal(int(math.sqrt(columnNumber))*i+k,int(math.sqrt(columnNumber))*j+l,z, columnNumber))
 
 
 def main():
