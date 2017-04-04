@@ -8,12 +8,12 @@ def convertToDecimal(x,y,z, size):
 	return size**2 * (x-1) + size * (y-1)+z
 	
 def eachElementHasAtLeastOneNumber(columnNumber, outputGrid):
-	for x in range(1,columnNumber+1):
-		for y in range(1,columnNumber+1):
+	for x in range(1,columnNumber+1): #i
+		for y in range(1,columnNumber+1): #j
 			list = ""
 			occurence = False
 			first = True
-			for z in range(1,columnNumber+1):
+			for z in range(1,columnNumber+1): #k
 				if(returnValueAt(x,y,outputGrid) != z and occurence == False):
 					#actually dont bother printing this out in that case
 					if first == False:
@@ -26,31 +26,33 @@ def eachElementHasAtLeastOneNumber(columnNumber, outputGrid):
 			print list
 		
 def eachRowHasAtMostOneOfEachNumber(columnNumber, outputGrid):
-	for y in range(1,columnNumber+1):
-		for z in range(1,columnNumber+1):
-			for x in range(1,columnNumber):
-				for i in range(x+1,columnNumber+1):
+	for y in range(1,columnNumber+1): #i
+		for z in range(1,columnNumber+1): #k
+			for x in range(1,columnNumber): #j
+				for i in range(x+1,columnNumber+1): #l
 					print "-%s -%s" %(convertToDecimal(x,y,z, columnNumber),convertToDecimal(i,y,z, columnNumber))
 			
 def eachColumnHasAtMostOneOfEachNumber(columnNumber, outputGrid):
-	for x in range(1,columnNumber+1):
-		for z in range(1,columnNumber+1):
-			for y in range(1,columnNumber):
-				for i in range(y+1,columnNumber+1):
+	for x in range(1,columnNumber+1): #j
+		for z in range(1,columnNumber+1): #k
+			for y in range(1,columnNumber): #i
+				for i in range(y+1,columnNumber+1): #l
 					print "-%s -%s" %(convertToDecimal(x,y,z, columnNumber), convertToDecimal(x,i,z, columnNumber))
 			
 def eachNumberAppearsAtMostOncePerGrid(columnNumber, outputGrid):
-	for z in range(1,columnNumber+1):
-		for i in range(0,int(math.sqrt(columnNumber))):
-			for j in range(0,int(math.sqrt(columnNumber))):
-				for x in range(1,int(math.sqrt(columnNumber)+1)):
-					for y in range(1,int(math.sqrt(columnNumber)+1)):
-						for k in range(y+1,int(math.sqrt(columnNumber)+1)):
+	for z in range(1,columnNumber+1): #k
+		for i in range(0,int(math.sqrt(columnNumber))): #a
+			for j in range(0,int(math.sqrt(columnNumber))): #b
+				for x in range(1,int(math.sqrt(columnNumber)+1)): #u
+					for y in range(1,int(math.sqrt(columnNumber)+1)): #v
+						for k in range(y+1,int(math.sqrt(columnNumber)+1)): #w
 							print "-%s -%s"%(convertToDecimal(int(math.sqrt(columnNumber))*i+x,int(math.sqrt(columnNumber))*j+y,z, columnNumber), convertToDecimal(int(math.sqrt(columnNumber))*i+x,int(math.sqrt(columnNumber))*j+k,z, columnNumber))
-						for k in range(x+1,int(math.sqrt(columnNumber)+1)):
-							for l in range(1,int(math.sqrt(columnNumber))+1):
+						for k in range(x+1,int(math.sqrt(columnNumber)+1)): #w
+							for l in range(1,int(math.sqrt(columnNumber))+1): #t
 								print "-%s -%s"%(convertToDecimal(int(math.sqrt(columnNumber))*i+x,int(math.sqrt(columnNumber))*j+y,z, columnNumber), convertToDecimal(int(math.sqrt(columnNumber))*i+k,int(math.sqrt(columnNumber))*j+l,z, columnNumber))
 
+# -------------------
+								
 def atMostOneNumberInEachEntry(columnNumber, outputGrid):
 	for x in range(1,columnNumber+1):
 		for y in range(1,columnNumber+1):
@@ -113,6 +115,13 @@ def main():
 		columnNumber = 0
 		outputGrid = []
 		puzzleNumber = 0
+		
+		test = 0
+		for x in inputGrid.splitlines():
+			print x, test
+			test += 1
+		
+		
 		for x in inputGrid.splitlines():
 			if x.startswith('Grid'):
 				if(columnNumber != 0):	#not the beginning of the file
@@ -121,6 +130,7 @@ def main():
 					eachRowHasAtMostOneOfEachNumber(columnNumber, outputGrid)	
 					eachColumnHasAtMostOneOfEachNumber(columnNumber, outputGrid)
 					eachNumberAppearsAtMostOncePerGrid(columnNumber, outputGrid)
+					print "more encoding"
 					atMostOneNumberInEachEntry(columnNumber, outputGrid)
 					eachNumberOncePerRow(columnNumber, outputGrid)
 					eachNumberOncePerColumn(columnNumber, outputGrid)
@@ -139,10 +149,12 @@ def main():
 			eachRowHasAtMostOneOfEachNumber(columnNumber, outputGrid)	
 			eachColumnHasAtMostOneOfEachNumber(columnNumber, outputGrid)
 			eachNumberAppearsAtMostOncePerGrid(columnNumber, outputGrid)
+			print "more encoding"
 			atMostOneNumberInEachEntry(columnNumber, outputGrid)
 			eachNumberOncePerRow(columnNumber, outputGrid)
 			eachNumberOncePerColumn(columnNumber, outputGrid)
 			eachNumberOncePerGrid(columnNumber, outputGrid)
+		
 		
 if __name__ == "__main__":
 	main() 
