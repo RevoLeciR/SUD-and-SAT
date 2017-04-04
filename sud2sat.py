@@ -114,13 +114,7 @@ def main():
 			inputGrid = sys.argv[1]
 		columnNumber = 0
 		outputGrid = []
-		puzzleNumber = 0
-		
-		test = 0
-		for x in inputGrid.splitlines():
-			print x, test
-			test += 1
-		
+		puzzleNumber = 0		
 		
 		for x in inputGrid.splitlines():
 			if x.startswith('Grid'):
