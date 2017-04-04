@@ -18,7 +18,9 @@ def solvePuzzle(size, sat):
 	for w in range(100):
 		secondArray = []
 	
+	
 		for x in satExpressions:
+			#print x
 			if len(x) == 1:
 				if x[0][0] == '-':
 					truths[int(x[0][1:])] = False
@@ -41,7 +43,7 @@ def solvePuzzle(size, sat):
 				if(copy == True):
 					secondArray.append(subArray)
 		satExpressions = secondArray
-	
+		#print " "
 	board = []
 	
 	for a in range(size):
