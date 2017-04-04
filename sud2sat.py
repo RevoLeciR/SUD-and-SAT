@@ -23,21 +23,21 @@ def eachElementHasAtLeastOneNumber(columnNumber, outputGrid):
 				elif occurence == False:
 					list = "%s" %(convertToDecimal(x,y,z, columnNumber))
 					occurence = True
-			print list
+			print "( %s )" %list
 		
 def eachRowHasAtMostOneOfEachNumber(columnNumber, outputGrid):
 	for y in range(1,columnNumber+1): #i
 		for z in range(1,columnNumber+1): #k
 			for x in range(1,columnNumber): #j
 				for i in range(x+1,columnNumber+1): #l
-					print "-%s -%s" %(convertToDecimal(x,y,z, columnNumber),convertToDecimal(i,y,z, columnNumber))
+					print "( -%s -%s )" %(convertToDecimal(x,y,z, columnNumber),convertToDecimal(i,y,z, columnNumber))
 			
 def eachColumnHasAtMostOneOfEachNumber(columnNumber, outputGrid):
 	for x in range(1,columnNumber+1): #j
 		for z in range(1,columnNumber+1): #k
 			for y in range(1,columnNumber): #i
 				for i in range(y+1,columnNumber+1): #l
-					print "-%s -%s" %(convertToDecimal(x,y,z, columnNumber), convertToDecimal(x,i,z, columnNumber))
+					print "( -%s -%s )" %(convertToDecimal(x,y,z, columnNumber), convertToDecimal(x,i,z, columnNumber))
 			
 def eachNumberAppearsAtMostOncePerGrid(columnNumber, outputGrid):
 	for z in range(1,columnNumber+1): #k
@@ -49,7 +49,7 @@ def eachNumberAppearsAtMostOncePerGrid(columnNumber, outputGrid):
 							print "-%s -%s"%(convertToDecimal(int(math.sqrt(columnNumber))*i+x,int(math.sqrt(columnNumber))*j+y,z, columnNumber), convertToDecimal(int(math.sqrt(columnNumber))*i+x,int(math.sqrt(columnNumber))*j+k,z, columnNumber))
 						for k in range(x+1,int(math.sqrt(columnNumber)+1)): #w
 							for l in range(1,int(math.sqrt(columnNumber))+1): #t
-								print "-%s -%s"%(convertToDecimal(int(math.sqrt(columnNumber))*i+x,int(math.sqrt(columnNumber))*j+y,z, columnNumber), convertToDecimal(int(math.sqrt(columnNumber))*i+k,int(math.sqrt(columnNumber))*j+l,z, columnNumber))
+								print "( -%s -%s )"%(convertToDecimal(int(math.sqrt(columnNumber))*i+x,int(math.sqrt(columnNumber))*j+y,z, columnNumber), convertToDecimal(int(math.sqrt(columnNumber))*i+k,int(math.sqrt(columnNumber))*j+l,z, columnNumber))
 
 # -------------------
 								
@@ -58,7 +58,7 @@ def atMostOneNumberInEachEntry(columnNumber, outputGrid):
 		for y in range(1,columnNumber+1):
 			for z in range(1,columnNumber):
 				for i in range(z+1,columnNumber+1):
-					print "-%s -%s" %(convertToDecimal(x,y,z, columnNumber), convertToDecimal(x,y,i, columnNumber))
+					print "( -%s -%s )" %(convertToDecimal(x,y,z, columnNumber), convertToDecimal(x,y,i, columnNumber))
 					
 def eachNumberOncePerRow(columnNumber, outputGrid):
 	for y in range(1,columnNumber+1):
@@ -70,7 +70,7 @@ def eachNumberOncePerRow(columnNumber, outputGrid):
 					list += ' '
 				first = False
 				list += "%s" %(convertToDecimal(x,y,z, columnNumber))
-			print list
+			print "( %s )" %list
 			
 def eachNumberOncePerColumn(columnNumber, outputGrid):
 	for x in range(1,columnNumber+1):
@@ -82,7 +82,7 @@ def eachNumberOncePerColumn(columnNumber, outputGrid):
 					list += ' '
 				first = False
 				list += "%s" %(convertToDecimal(x,y,z, columnNumber))
-			print list
+			print "( %s )" %list
 			
 def eachNumberOncePerGrid(columnNumber, outputGrid):
 	for z in range(1,columnNumber+1):
@@ -96,7 +96,7 @@ def eachNumberOncePerGrid(columnNumber, outputGrid):
 							list += ' '
 						first = False
 						list += "%s" %(convertToDecimal(int(math.sqrt(columnNumber))*i+x,int(math.sqrt(columnNumber))*j+y,z, columnNumber))
-		print list
+		print "( %s )" %list
 
 
 def main():
