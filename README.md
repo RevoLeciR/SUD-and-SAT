@@ -1,5 +1,9 @@
 # SUD-and-SAT
 CSC320 Project
 
-Read Sudoku As SAT PDF for understanding the concept of the project.
-Read the Project Outline PDF for instructions on what to do.
+Samuel Allegretto-Smith | Eric Hedlin | Jasmine Yadeta | Richard Lui
+University of Victoria | CSC 320 | Spring 2017 (January - April)
+Professor: Bruce Kapron
+Section: A01
+
+Documents Submitted
