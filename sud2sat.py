@@ -137,8 +137,23 @@ def encodingCalls(columnNumber, outputGrid):
 		#print(total)
 		#ave = total + ave
 
-
-
+def hardInputToSudoku(input):
+	newArr = []
+	nums = ['1','2','3','4','5','6','7','8','9']
+	
+	for x in range(len(input)):
+		if input[x] not in nums:
+			newArr.append('0')
+		else:
+			newArr.append(input[x])
+	
+	str = ''.join(newArr)
+	
+	newGrid = []
+	for x in range(0, len(input), int(math.sqrt(len(input)))):
+		newGrid.append(str[x:x+int(math.sqrt(len(input)))])
+		
+	return newGrid
 
 def main():
 	
@@ -153,6 +168,7 @@ def main():
 		except:
 			print ("Not a valid file")
 			inputGrid = sys.argv[1]
+
 		columnNumber = 0
 		outputGrid = []
 		puzzleNumber = 0		
@@ -161,17 +177,27 @@ def main():
 		count = 0
 		
 		for x in inputGrid.splitlines():
-			if not x.startswith('Grid'):
+			if not x.startswith('Grid') and len(x) != 81: # the len(x)!=81 is not a safe condition to have, but needed for the magictour inputs
 				outputGrid.append(x)
 				columnNumber = len(outputGrid[0])
 			elif x.startswith('Grid 01'):
 				#print x  #to see which grid number
 				None
-			elif x.startswith('Grid'):
+			elif x.startswith('Grid') and outputGrid != []:
 				encodingCalls(columnNumber, outputGrid)
 				outputGrid = []
 				columnNumber = 0
 				#print x  #to see which grid number
+			elif len(x) is 81: #for the "hard" inputs
+				outputGrid = hardInputToSudoku(x)
+				columnNumber = len(outputGrid)
+				encodingCalls(columnNumber,outputGrid)
+				
+				#reset
+				outputGrid = []
+				columnNumber = 0
+			else:
+				None #default case
 				
 		
 		encodingCalls(columnNumber, outputGrid) #for the last grid
