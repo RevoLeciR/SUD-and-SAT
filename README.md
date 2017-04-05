@@ -7,6 +7,7 @@ Samuel Allegretto-Smith | Eric Hedlin | Jasmine Yadeta | Richard Lui
 University of Victoria | CSC 320 | Spring 2017
 
 Professor: Bruce Kapron
+
 Section: A01
 
 ## Contact Information
