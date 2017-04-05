@@ -122,13 +122,15 @@ def main():
 
 		for x in inputGrid.splitlines():
 			if x.startswith('Grid'):
+				print x
 				if(columnNumber != 0):	#not the beginning of the file
+				
 					print ("new puzzle, %s*%s" %(columnNumber,columnNumber))
 					eachElementHasAtLeastOneNumber(columnNumber, outputGrid)	
 					eachRowHasAtMostOneOfEachNumber(columnNumber, outputGrid)	
 					eachColumnHasAtMostOneOfEachNumber(columnNumber, outputGrid)
 					eachNumberAppearsAtMostOncePerGrid(columnNumber, outputGrid)
-					#print ("more encoding")
+					
 					atMostOneNumberInEachEntry(columnNumber, outputGrid)
 					eachNumberOncePerRow(columnNumber, outputGrid)
 					eachNumberOncePerColumn(columnNumber, outputGrid)
@@ -149,7 +151,7 @@ def main():
 
 			
 
-				
+		'''		
 		if columnNumber != 0:
 			t1 = time.time()
 			print ("new puzzle, %s*%s" %(columnNumber,columnNumber))
@@ -168,9 +170,10 @@ def main():
 			#print(total)
 			ave = total + ave
 			count = count + 1
+		'''
 			
 		
-	average = ave/count
+	#average = ave/count
 	#print('average time')
 	#print(average)
 	#print('total time')
