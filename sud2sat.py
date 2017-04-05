@@ -2,6 +2,11 @@ import sys
 import math
 import time
 
+def nCr(n,r):
+    f = math.factorial
+    return f(n) / f(r) / f(n-r)
+
+
 def returnValueAt(row, column, grid):
 	return int(grid[column-1][row-1])
 
@@ -123,7 +128,9 @@ def main():
 		for x in inputGrid.splitlines():
 			if x.startswith('Grid'):
 				if(columnNumber != 0):	#not the beginning of the file
-					print ("new puzzle, %s*%s" %(columnNumber,columnNumber))
+					numclause=(columnNumber*columnNumber*int(math.sqrt(columnNumber))*int(nCr(columnNumber,2)))
+					numvar=columnNumber*columnNumber*columnNumber
+					print ("p cnf %s %s" %(numclause,numvar))
 					eachElementHasAtLeastOneNumber(columnNumber, outputGrid)	
 					eachRowHasAtMostOneOfEachNumber(columnNumber, outputGrid)	
 					eachColumnHasAtMostOneOfEachNumber(columnNumber, outputGrid)
