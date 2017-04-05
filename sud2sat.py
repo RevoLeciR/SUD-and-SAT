@@ -46,7 +46,7 @@ def eachNumberAppearsAtMostOncePerGrid(columnNumber, outputGrid):
 				for x in range(1,int(math.sqrt(columnNumber)+1)): #u
 					for y in range(1,int(math.sqrt(columnNumber)+1)): #v
 						for k in range(y+1,int(math.sqrt(columnNumber)+1)): #w
-							print "-%s -%s"%(convertToDecimal(int(math.sqrt(columnNumber))*i+x,int(math.sqrt(columnNumber))*j+y,z, columnNumber), convertToDecimal(int(math.sqrt(columnNumber))*i+x,int(math.sqrt(columnNumber))*j+k,z, columnNumber))
+							print "( -%s -%s )"%(convertToDecimal(int(math.sqrt(columnNumber))*i+x,int(math.sqrt(columnNumber))*j+y,z, columnNumber), convertToDecimal(int(math.sqrt(columnNumber))*i+x,int(math.sqrt(columnNumber))*j+k,z, columnNumber))
 						for k in range(x+1,int(math.sqrt(columnNumber)+1)): #w
 							for l in range(1,int(math.sqrt(columnNumber))+1): #t
 								print "( -%s -%s )"%(convertToDecimal(int(math.sqrt(columnNumber))*i+x,int(math.sqrt(columnNumber))*j+y,z, columnNumber), convertToDecimal(int(math.sqrt(columnNumber))*i+k,int(math.sqrt(columnNumber))*j+l,z, columnNumber))
