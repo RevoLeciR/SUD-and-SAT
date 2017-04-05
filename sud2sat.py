@@ -111,31 +111,33 @@ def encodingCalls(columnNumber, outputGrid):
 	if(columnNumber != 0):	#not the beginning of the file
 		numclause=(columnNumber*columnNumber*int(math.sqrt(columnNumber))*int(nCr(columnNumber,2))) + (columnNumber*columnNumber)
 		numvar=columnNumber*columnNumber*columnNumber
-		print ("p cnf %s %s" %(numclause,numvar))
 		
-		#minimal encoding
+		#print "minimal encoding"
+		print ("p cnf %s %s" %(numvar,numclause))
 		eachElementHasAtLeastOneNumber(columnNumber, outputGrid)	
 		eachRowHasAtMostOneOfEachNumber(columnNumber, outputGrid)	
 		eachColumnHasAtMostOneOfEachNumber(columnNumber, outputGrid)
 		eachNumberAppearsAtMostOncePerGrid(columnNumber, outputGrid)
 		
-		#extended encoding
 		'''
+		print "extended encoding"
+		exnumclause = (columnNumber*columnNumber*(int(math.sqrt(columnNumber))+1)*int(nCr(columnNumber,2))) + (columnNumber*columnNumber*(int(math.sqrt(columnNumber))+1))
+		print ("p cnf %s %s" %(numvar,exnumclause))
 		atMostOneNumberInEachEntry(columnNumber, outputGrid)
 		eachNumberOncePerRow(columnNumber, outputGrid)
 		eachNumberOncePerColumn(columnNumber, outputGrid)
 		eachNumberOncePerGrid(columnNumber, outputGrid)
 		'''
+		
 					
-					#outputGrid = []
-					#t1 = time.time()
-					#total = t1-t0
-					#print('puzzle time')
-					#print(total)
-					#ave = total + ave
-					#count = count + 1
-					#run the input. what form to have the input in? string
-				#columnNumber = 0
+		#outputGrid = []
+		#t1 = time.time()
+		#total = t1-t0
+		#print('puzzle time')
+		#print(total)
+		#ave = total + ave
+
+
 
 
 def main():
@@ -158,14 +160,12 @@ def main():
 		ave = 0
 		count = 0
 		
-		
-
 		for x in inputGrid.splitlines():
 			if not x.startswith('Grid'):
 				outputGrid.append(x)
 				columnNumber = len(outputGrid[0])
 			elif x.startswith('Grid 01'):
-				#print x  #for see which grid number
+				#print x  #to see which grid number
 				None
 			elif x.startswith('Grid'):
 				encodingCalls(columnNumber, outputGrid)
@@ -176,12 +176,6 @@ def main():
 		
 		encodingCalls(columnNumber, outputGrid) #for the last grid
 			
-			#else:
-			#	outputGrid.append(x)
-			#	columnNumber += 1
-			
-			
-
 		'''		
 		if columnNumber != 0:
 			t1 = time.time()
