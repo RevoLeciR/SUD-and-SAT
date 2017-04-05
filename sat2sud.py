@@ -54,12 +54,12 @@ def solvePuzzle(size, sat):
 	for a in range(1, len(truths)):
 		if truths[a] == True:
 			x = int((a-1)/size**2)
-			y= int((a-1 - x*size**2)/size)
+			y = int((a-1 - x*size**2)/size)
 			z = a-x*size**2-size*y
 			board[y][x] = z
 			
 	for a in range(size):
-		print board[a]
+		print (board[a])
 
 def main():
 	if len(sys.argv) == 1:
