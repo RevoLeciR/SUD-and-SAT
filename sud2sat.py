@@ -1,6 +1,9 @@
 import sys
 import math
 
+nin_board = []
+bi_board = []
+
 def returnValueAt(row, column, grid):
 	return int(grid[column-1][row-1])
 
@@ -124,7 +127,7 @@ def main():
 					eachRowHasAtMostOneOfEachNumber(columnNumber, outputGrid)	
 					eachColumnHasAtMostOneOfEachNumber(columnNumber, outputGrid)
 					eachNumberAppearsAtMostOncePerGrid(columnNumber, outputGrid)
-					print "more encoding"
+					#print "extended encoding"
 					atMostOneNumberInEachEntry(columnNumber, outputGrid)
 					eachNumberOncePerRow(columnNumber, outputGrid)
 					eachNumberOncePerColumn(columnNumber, outputGrid)
@@ -143,7 +146,7 @@ def main():
 			eachRowHasAtMostOneOfEachNumber(columnNumber, outputGrid)	
 			eachColumnHasAtMostOneOfEachNumber(columnNumber, outputGrid)
 			eachNumberAppearsAtMostOncePerGrid(columnNumber, outputGrid)
-			print "more encoding"
+			#print "extended encoding"
 			atMostOneNumberInEachEntry(columnNumber, outputGrid)
 			eachNumberOncePerRow(columnNumber, outputGrid)
 			eachNumberOncePerColumn(columnNumber, outputGrid)
