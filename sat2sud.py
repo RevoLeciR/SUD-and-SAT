@@ -17,12 +17,13 @@ def solvePuzzle(satExpressions):
 	
 	for x in satExpressions[1]:	
 		if(x != 0):
+			#truth array keeps track of the negated variables
 			if x[0] == '-':
 				truths[int(x[1:])] = False
 			else:
 				truths[int(x)] = True
 			
-	board = []
+	board = [] #array that will printed out containing solved puzzle
 	
 	for a in range(size):
 		board.append([])
@@ -30,18 +31,22 @@ def solvePuzzle(satExpressions):
 			board[a].append(0)
 			
 	for a in range(1, len(truths)):
+		#algorithem to convert CNF back to an integer
+		#uses the formula given in SudokuasSat.pdf
 		if truths[a] == True:
 			x = int((a-1)/size**2)
 			y = int((a-1 - x*size**2)/size)
 			z = a-x*size**2-size*y
 			board[y][x] = z
-			
+	
+	#print the solved puzzle		
 	for a in range(size):
 		print (board[a])
 
 def main():
+	#sat2sud.py takes in the output of the SAT solver as a command line argument
 	if len(sys.argv) == 1:
-		print ("No arguments")
+		print ("No arguments") #no file given so we exit
 	else:
 		inputSat = ""
 		try:
@@ -51,7 +56,7 @@ def main():
 		except:
 			print ("Not a valid file")
 			inputGrid = sys.argv[1]
-			
+		#once a valid file is given solvePuzzle is called to turn the cnf from the SAT to a sudoku	
 		inputSat = inputSat.splitlines()
 		solvePuzzle(inputSat)
 		
