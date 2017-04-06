@@ -51,15 +51,14 @@ def solvePuzzle(satExpressions):
 		#algorithm to convert CNF back to an integer
 		#uses the formula given in SudokuasSat.pdf
 		if truths[a] == True:
-			x = int(a/size**2)
-			y = int((a - x*size**2)/size)
-			z = a-x*size**2-size*y
-			board[x][y] = z
-	
+			x = int((a)/size**2)
+			y = int(((a) - x*size**2)/size)
+			z = (a+1)-x*size**2-size*y
+			board[y][x] = z
+			
 	#print the solved puzzle		
 	for a in range(size):
 		print (board[a])
-	
 
 def main():
 	#sat2sud.py takes in the output of the SAT solver as a command line argument
