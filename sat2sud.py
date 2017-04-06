@@ -1,49 +1,27 @@
 import sys
 import math
 
-def solvePuzzle(size, sat):
-	satExpressions = sat
+def solvePuzzle(satExpressions):
+
+	size = len(satExpressions[1])-1
+
+	truths = [None]*(size)
+	size = size**(1/3)
 	
-	truths = [None]*(size**3+1)
+	satExpressions[1] = satExpressions[1].split(' ')
 	
-	
-	for x in range(len(satExpressions)):
-		satExpressions[x] = satExpressions[x].split(' ')
-	
-	#while there are still expressions left
-	#while len(satExpressions) > 0:
-	
-	
-	#while len(satExpressions) > 2069:
-	for w in range(100):
-		secondArray = []
+	secondArray = []
 	
 	
-		for x in satExpressions:
-			#print x
-			if len(x) == 1:
-				if x[0][0] == '-':
-					truths[int(x[0][1:])] = False
-				else:
-					truths[int(x[0])] = True
-			elif len(x) > 1:
-				subArray = []
-				copy = True
-				for y in x:
-					if y[0] == '-':
-						if(truths[int(y[1:])] != True):
-							subArray.append(y)
-						if(truths[int(y[1:])] == False):
-							copy = False
-					else:
-						if(truths[int(y)] != False):
-							subArray.append(y)
-						if(truths[int(y)] == True):
-							copy = False
-				if(copy == True):
-					secondArray.append(subArray)
-		satExpressions = secondArray
-		#print " "
+	
+	
+	for x in satExpressions[1]:	
+		if(x != 0):
+			if x[0] == '-':
+				truths[int(x[1:])] = False
+			else:
+				truths[int(x)] = True
+			
 	board = []
 	
 	for a in range(size):
@@ -74,21 +52,8 @@ def main():
 			print ("Not a valid file")
 			inputGrid = sys.argv[1]
 			
-		sat = []
-		boardSize = 0
-			
-		for x in inputSat.splitlines():
-			if x.startswith('new puzzle'):
-				boardSize = int(x[12])
-				if(sat!= []):
-					print ('next puzzle')
-					solvePuzzle(boardSize,sat)
-					sat = []
-			else:
-				sat.append(x)
-		if sat != []:
-			print ('next puzzle')
-			solvePuzzle(boardSize,sat)
+		inputSat = inputSat.splitlines()
+		solvePuzzle(inputSat)
 		
 if __name__ == "__main__":
 	main() 
