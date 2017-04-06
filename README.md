@@ -44,8 +44,11 @@ Sat2sud.py takes in a text file that contains the sudoku puzzle is the following
 
 Grid 01
 003020600
+
 900305001
+
 001806400
+
 008102900
 700000008
 006708200
