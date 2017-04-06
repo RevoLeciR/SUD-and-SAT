@@ -11,7 +11,7 @@ Professor: Bruce Kapron
 Section: A01
 
 ## Contact Information
-#### <i class="icon-pencil"></i> Samuel Allegretto-Smith (V#)
+#### <i class="icon-pencil"></i> Samuel Allegretto-Smith (V00822198)
 samueljohn@shaw.ca
 #### <i class="icon-pencil"></i> Eric Hedlin (V#)
 iamerichedlin@gmail.com
@@ -106,5 +106,5 @@ Grid 02
 004010003
 
  
-The 0s represent empty spots in the puzzle and can be any other character except the integers between and including 1-9. To run sud2sat type “python sud2sat.py p096_sudoku.txt > out.txt” into the command line. p096_sudoku.txt is the file containing the puzzles and out.txt is the file that will have the CNF formulas printed to it. Next, to solve the CNF in out.txt use the miniSAT solver by typing in “minisat out.txt solved.txt” into the command line. Solved.txt will be the txt file containing the CNFs for the solved sudoku puzzles. To convert back to a solved sudoku puzzle use the command line argument “python sat2sud.py solved.txt > solvedsudoku.txt”. This will make a text file named solvedsudoku which contains the solved sudoku puzzle(s). 
+The 0's represent empty spots in the puzzle and can be any other character except the integers between and including 1-9. To run sud2sat type “python sud2sat.py p096_sudoku.txt > out.txt” into the command line. p096_sudoku.txt is the file containing the puzzles and out.txt is the file that will have the CNF formulas printed to it. Next, to solve the CNF in out.txt use the miniSAT solver by typing in “minisat out.txt solved.txt” into the command line. Solved.txt will be the txt file containing the CNFs for the solved sudoku puzzles. To convert back to a solved sudoku puzzle use the command line argument “python sat2sud.py solved.txt > solvedsudoku.txt”. This will make a text file named solvedsudoku which contains the solved sudoku puzzle(s). 
 
