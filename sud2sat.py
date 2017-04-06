@@ -113,19 +113,17 @@ def encodingCalls(columnNumber, outputGrid):
 	if(columnNumber != 0):	#not the beginning of the file
 		numclause=(columnNumber*columnNumber*int(math.sqrt(columnNumber))*int(nCr(columnNumber,2))) + (columnNumber*columnNumber)
 		numvar=columnNumber*columnNumber*columnNumber
+		#print ("p cnf %s %s" %(numvar,numclause)) #for minimal encoding clauses
+		exnumclause = (columnNumber*columnNumber*(int(math.sqrt(columnNumber))+1)*int(nCr(columnNumber,2))) + (columnNumber*columnNumber*(int(math.sqrt(columnNumber))+1)) #minimal + extended encodings
+		print ("p cnf %s %s" %(numvar,exnumclause))
 		
-		'''
 		#print "minimal encoding"
-		print ("p cnf %s %s" %(numvar,numclause))
 		eachElementHasAtLeastOneNumber(columnNumber, outputGrid)	
 		eachRowHasAtMostOneOfEachNumber(columnNumber, outputGrid)	
 		eachColumnHasAtMostOneOfEachNumber(columnNumber, outputGrid)
 		eachNumberAppearsAtMostOncePerGrid(columnNumber, outputGrid)
-		'''
 		
 		#print "extended encoding"
-		exnumclause = (columnNumber*columnNumber*(int(math.sqrt(columnNumber))+1)*int(nCr(columnNumber,2))) + (columnNumber*columnNumber*(int(math.sqrt(columnNumber))+1)) - numclause
-		print ("p cnf %s %s" %(numvar,exnumclause))
 		atMostOneNumberInEachEntry(columnNumber, outputGrid)
 		eachNumberOncePerRow(columnNumber, outputGrid)
 		eachNumberOncePerColumn(columnNumber, outputGrid)
