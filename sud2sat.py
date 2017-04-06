@@ -167,38 +167,12 @@ def main():
 		boolGrid = False
 		
 		'''
-		for x in inputGrid.splitlines():
-			if not x.startswith('Grid') and len(x) != 81: # the len(x)!=81 is not a safe condition to have, but needed for the magictour inputs
-				outputGrid.append(x)
-				columnNumber = len(outputGrid[0])
-			elif x.startswith('Grid 01'):
-				#print x  #to see which grid number
-				None
-			elif x.startswith('Grid') and outputGrid != []:
-				encodingCalls(columnNumber, outputGrid)
-				outputGrid = []
-				columnNumber = 0
-				#print x  #to see which grid number
-			elif len(x) is 81: #for the "hard" inputs
-				outputGrid = hardInputToSudoku(x)
-				columnNumber = len(outputGrid)
-				encodingCalls(columnNumber,outputGrid)
-				
-				#reset
-				outputGrid = []
-				columnNumber = 0
-			else:
-				None #default case
-		'''
-		
-		'''
 		#below assumes only two types of inputs, 
 			1. projecteuler.net/project/resources/p096 sudoku.txt
 			2. magictour.free.fr/top95
 		
 		if there are other inputs, the for loop below might or might not function
 		'''
-		
 		for x in inputGrid.splitlines():
 			if x.startswith('Grid') and boolGrid is False:
 				#print x
