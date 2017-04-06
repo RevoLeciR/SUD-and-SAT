@@ -91,43 +91,46 @@ def eachNumberOncePerColumn(columnNumber, outputGrid):
 				first = False
 				list += "%s" %(convertToDecimal(x,y,z, columnNumber))
 			print ("%s %s" %(list,0))
-			#print ("%s" %list)
 			
 def eachNumberOncePerGrid(columnNumber, outputGrid):
+	#print "eachNumberOncePerGrid"
 	for z in range(1,columnNumber+1):
-		list = ""
-		first = True
+		#list = ""
+		#first = True
 		for i in range(0,int(math.sqrt(columnNumber))):
 			for j in range(0,int(math.sqrt(columnNumber))):
+				list = ""
+				first = True
 				for x in range(1,int(math.sqrt(columnNumber))+1):
 					for y in range(1,int(math.sqrt(columnNumber))+1):
 						if first == False:
 							list += ' '
 						first = False
 						list += "%s" %(convertToDecimal(int(math.sqrt(columnNumber))*i+x,int(math.sqrt(columnNumber))*j+y,z, columnNumber))
-		print ("%s %s" %(list,0))
+				print ("%s %s" %(list,0))
 		
 def encodingCalls(columnNumber, outputGrid):
 	if(columnNumber != 0):	#not the beginning of the file
 		numclause=(columnNumber*columnNumber*int(math.sqrt(columnNumber))*int(nCr(columnNumber,2))) + (columnNumber*columnNumber)
 		numvar=columnNumber*columnNumber*columnNumber
 		
+		'''
 		#print "minimal encoding"
 		print ("p cnf %s %s" %(numvar,numclause))
 		eachElementHasAtLeastOneNumber(columnNumber, outputGrid)	
 		eachRowHasAtMostOneOfEachNumber(columnNumber, outputGrid)	
 		eachColumnHasAtMostOneOfEachNumber(columnNumber, outputGrid)
 		eachNumberAppearsAtMostOncePerGrid(columnNumber, outputGrid)
-		
 		'''
-		print "extended encoding"
-		exnumclause = (columnNumber*columnNumber*(int(math.sqrt(columnNumber))+1)*int(nCr(columnNumber,2))) + (columnNumber*columnNumber*(int(math.sqrt(columnNumber))+1))
+		
+		#print "extended encoding"
+		exnumclause = (columnNumber*columnNumber*(int(math.sqrt(columnNumber))+1)*int(nCr(columnNumber,2))) + (columnNumber*columnNumber*(int(math.sqrt(columnNumber))+1)) - numclause
 		print ("p cnf %s %s" %(numvar,exnumclause))
 		atMostOneNumberInEachEntry(columnNumber, outputGrid)
 		eachNumberOncePerRow(columnNumber, outputGrid)
 		eachNumberOncePerColumn(columnNumber, outputGrid)
 		eachNumberOncePerGrid(columnNumber, outputGrid)
-		'''
+		
 		
 					
 		#outputGrid = []
