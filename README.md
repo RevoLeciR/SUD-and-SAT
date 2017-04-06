@@ -43,6 +43,7 @@ Extended tasks enable the ability to solve "harder puzzles", attempt nxn boards,
 Sat2sud.py takes in a text file that contains the sudoku puzzle is the following n by n format
 
 Grid 01
+
 003020600
 
 900305001
@@ -50,33 +51,58 @@ Grid 01
 001806400
 
 008102900
+
 700000008
+
 006708200
+
 002609500
+
 800203009
+
 005010300
 
 For more than one puzzle at a time - 
 
 Grid 01
+
 003020600
+
 900305001
+
 001806400
+
 008102900
+
 700000008
+
 006708200
+
 002609500
+
 800203009
+
 005010300
+
+
 Grid 02
+
 200080300
+
 060070084
+
 030500209
+
 000105408
+
 000000000
+
 402706000
+
 301007040
+
 720040060
+
 004010003
 
  
