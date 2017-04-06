@@ -31,7 +31,7 @@ def solvePuzzle(satExpressions):
 			board[a].append(0)
 			
 	for a in range(1, len(truths)):
-		#algorithem to convert CNF back to an integer
+		#algorithm to convert CNF back to an integer
 		#uses the formula given in SudokuasSat.pdf
 		if truths[a] == True:
 			x = int((a-1)/size**2)
