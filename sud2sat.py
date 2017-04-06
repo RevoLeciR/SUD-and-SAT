@@ -212,7 +212,6 @@ def main():
 				outputGrid = []
 				columnNumber = 0
 			else: #this is for all other inputs, mainly magictour (hard inputs). Not sure of other inputs
-				#print "hard mode"
 				outputGrid = hardInputToSudoku(x)
 				columnNumber = len(outputGrid)
 				encodingCalls(columnNumber, outputGrid)
