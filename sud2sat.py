@@ -128,15 +128,6 @@ def encodingCalls(columnNumber, outputGrid):
 		eachNumberOncePerRow(columnNumber, outputGrid)
 		eachNumberOncePerColumn(columnNumber, outputGrid)
 		eachNumberOncePerGrid(columnNumber, outputGrid)
-		
-		
-					
-		#outputGrid = []
-		#t1 = time.time()
-		#total = t1-t0
-		#print('puzzle time')
-		#print(total)
-		#ave = total + ave
 
 def hardInputToSudoku(input):
 	newArr = []
@@ -172,11 +163,10 @@ def main():
 
 		columnNumber = 0
 		outputGrid = []
-		puzzleNumber = 0		
-		t0 = time.time()
-		ave = 0
-		count = 0
 		
+		boolGrid = False
+		
+		'''
 		for x in inputGrid.splitlines():
 			if not x.startswith('Grid') and len(x) != 81: # the len(x)!=81 is not a safe condition to have, but needed for the magictour inputs
 				outputGrid.append(x)
@@ -199,37 +189,40 @@ def main():
 				columnNumber = 0
 			else:
 				None #default case
-				
-		
-		encodingCalls(columnNumber, outputGrid) #for the last grid
-			
-		'''		
-		if columnNumber != 0:
-			t1 = time.time()
-			print ("new puzzle, %s*%s" %(columnNumber,columnNumber))
-			eachElementHasAtLeastOneNumber(columnNumber, outputGrid)	
-			eachRowHasAtMostOneOfEachNumber(columnNumber, outputGrid)	
-			eachColumnHasAtMostOneOfEachNumber(columnNumber, outputGrid)
-			eachNumberAppearsAtMostOncePerGrid(columnNumber, outputGrid)
-			#print ("more encoding")
-			atMostOneNumberInEachEntry(columnNumber, outputGrid)
-			eachNumberOncePerRow(columnNumber, outputGrid)
-			eachNumberOncePerColumn(columnNumber, outputGrid)
-			eachNumberOncePerGrid(columnNumber, outputGrid)
-			
-			total = t1-t0
-			#print('puzzle time')
-			#print(total)
-			ave = total + ave
-			count = count + 1
 		'''
-			
 		
-	#average = ave/count
-	#print('average time')
-	#print(average)
-	#print('total time')
-	#print(ave)	
+		'''
+		#below assumes only two types of inputs, 
+			1. projecteuler.net/project/resources/p096 sudoku.txt
+			2. magictour.free.fr/top95
+		
+		if there are other inputs, the for loop below might or might not function
+		'''
+		
+		for x in inputGrid.splitlines():
+			if x.startswith('Grid') and boolGrid is False:
+				#print x
+				boolGrid = True
+			elif boolGrid is True and not x.startswith('Grid'):
+				outputGrid.append(x)
+				columnNumber = len(outputGrid[0])
+			elif boolGrid is True and x.startswith('Grid'):
+				encodingCalls(columnNumber, outputGrid)
+				#print x
+				outputGrid = []
+				columnNumber = 0
+			else: #this is for all other inputs, mainly magictour (hard inputs). Not sure of other inputs
+				#print "hard mode"
+				outputGrid = hardInputToSudoku(x)
+				columnNumber = len(outputGrid)
+				encodingCalls(columnNumber, outputGrid)
+				
+				#reset
+				outputGrid = []
+				columnNumber = 0				
+		
+		if outputGrid != []: #for the last grid
+			encodingCalls(columnNumber, outputGrid) 
 		
 if __name__ == "__main__":
 	main() 
