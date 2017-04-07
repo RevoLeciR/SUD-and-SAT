@@ -98,7 +98,8 @@ def eachNumberOncePerColumn(columnNumber, outputGrid, fil):
 					list += ' '
 				first = False
 				list += "%s" %(convertToDecimal(x,y,z, columnNumber))
-			print ("%s %s" %(list,0))
+			#print ("%s %s" %(list,0))
+			fil.write("%s %s" %(list,0))
 			
 def eachNumberOncePerGrid(columnNumber, outputGrid, fil):
 	#print "eachNumberOncePerGrid"
@@ -115,34 +116,34 @@ def eachNumberOncePerGrid(columnNumber, outputGrid, fil):
 							list += ' '
 						first = False
 						list += "%s" %(convertToDecimal(int(math.sqrt(columnNumber))*i+x,int(math.sqrt(columnNumber))*j+y,z, columnNumber))
-				print ("%s %s" %(list,0))
+				#print ("%s %s" %(list,0))
+				fil.write("%s %s" %(list,0))
 		
 def encodingCalls(columnNumber, outputGrid, fil):
 	if(columnNumber != 0):	#not the beginning of the file
 		numclause=(columnNumber*columnNumber*int(math.sqrt(columnNumber))*int(nCr(columnNumber,2))) + (columnNumber*columnNumber)
 		numvar=columnNumber*columnNumber*columnNumber
 		#print ("p cnf %s %s" %(numvar,numclause)) #for minimal encoding clauses
-		fil.write("p cnf %s %s\n" %(numvar,numclause))
+		#fil.write("p cnf %s %s\n" %(numvar,numclause))
 		
 		#for extended encoding
-		#exnumclause = (columnNumber*columnNumber*(int(math.sqrt(columnNumber))+1)*int(nCr(columnNumber,2))) + (columnNumber*columnNumber*(int(math.sqrt(columnNumber))+1)) #minimal + extended encodings
+		exnumclause = (columnNumber*columnNumber*(int(math.sqrt(columnNumber))+1)*int(nCr(columnNumber,2))) + (columnNumber*columnNumber*(int(math.sqrt(columnNumber))+1)) #minimal + extended encodings
 		#print ("p cnf %s %s" %(numvar,exnumclause))
-		#fil.write("p cnf %s %s\n" %(numvar,exnumclause))
+		fil.write("p cnf %s %s\n" %(numvar,exnumclause))
 		
 		#print "minimal encoding"
 		eachElementHasAtLeastOneNumber(columnNumber, outputGrid,fil)	
 		eachRowHasAtMostOneOfEachNumber(columnNumber, outputGrid,fil)	
 		eachColumnHasAtMostOneOfEachNumber(columnNumber, outputGrid,fil)
 		eachNumberAppearsAtMostOncePerGrid(columnNumber, outputGrid,fil)
-		fil.close()
 		
-		'''
 		#print "extended encoding"
 		atMostOneNumberInEachEntry(columnNumber, outputGrid)
 		eachNumberOncePerRow(columnNumber, outputGrid)
 		eachNumberOncePerColumn(columnNumber, outputGrid)
 		eachNumberOncePerGrid(columnNumber, outputGrid)
-		'''
+
+		fil.close()
 
 def hardInputToSudoku(input):
 	newArr = []
@@ -186,6 +187,7 @@ def main():
 		par_dir = os.getcwd()
 		new_dir = par_dir + "\\" + fldr
 		if not os.path.exists(new_dir):
+			print "Making new folder " + fldr
 			os.makedirs(new_dir)
 		else:
 			print "Folder already exists."
@@ -232,7 +234,6 @@ def main():
 				encodingCalls(columnNumber, outputGrid, fil)
 				fil.close()
 				count += 1
-				
 				#reset
 				outputGrid = []
 				columnNumber = 0				
@@ -240,7 +241,6 @@ def main():
 		
 		if outputGrid != []: #for the last grid
 			encodingCalls(columnNumber, outputGrid, fil)
-			count += 1
 		
 		fil.close()
 		
