@@ -99,7 +99,7 @@ def eachNumberOncePerColumn(columnNumber, outputGrid, fil):
 				first = False
 				list += "%s" %(convertToDecimal(x,y,z, columnNumber))
 			#print ("%s %s" %(list,0))
-			fil.write("%s %s" %(list,0))
+			fil.write("%s %s\n" %(list,0))
 			
 def eachNumberOncePerGrid(columnNumber, outputGrid, fil):
 	#print "eachNumberOncePerGrid"
@@ -117,7 +117,7 @@ def eachNumberOncePerGrid(columnNumber, outputGrid, fil):
 						first = False
 						list += "%s" %(convertToDecimal(int(math.sqrt(columnNumber))*i+x,int(math.sqrt(columnNumber))*j+y,z, columnNumber))
 				#print ("%s %s" %(list,0))
-				fil.write("%s %s" %(list,0))
+				fil.write("%s %s\n" %(list,0))
 		
 def encodingCalls(columnNumber, outputGrid, fil):
 	if(columnNumber != 0):	#not the beginning of the file
@@ -185,7 +185,8 @@ def main():
 		
 		fldr = raw_input("What folder you like to store all the encoded Sudoku boards? Enter the folder name only. ")
 		par_dir = os.getcwd()
-		new_dir = par_dir + "\\" + fldr
+		#new_dir = par_dir + "\\" + fldr #windows directory style
+		new_dir = par_dir + "/" + fldr #linux directory style
 		if not os.path.exists(new_dir):
 			print "Making new folder " + fldr
 			os.makedirs(new_dir)
@@ -206,11 +207,11 @@ def main():
 		
 		if there are other inputs, the for loop below might or might not function
 		'''
-		count = 1
+		count = 0
 		df = "Grid"
 		for x in inputGrid.splitlines():
 			if x.startswith('Grid') and boolGrid is False:
-				full_fn = df + str(count).zfill(2) + ".txt"
+				full_fn = df + str(count+1).zfill(2) + ".txt"
 				fil = open(full_fn,"w")
 				#print x
 				boolGrid = True
@@ -221,7 +222,7 @@ def main():
 				encodingCalls(columnNumber, outputGrid, fil)
 				fil.close()
 				count += 1
-				full_fn = df + str(count).zfill(2) + ".txt"
+				full_fn = df + str(count+1).zfill(2) + ".txt"
 				fil = open(full_fn,"w")				
 				#print x
 				outputGrid = []
@@ -229,7 +230,7 @@ def main():
 			else: #this is for all other inputs, mainly magictour (hard inputs). Not sure of other inputs
 				outputGrid = hardInputToSudoku(x)
 				columnNumber = len(outputGrid)
-				full_fn = df + str(count).zfill(2) + ".txt"
+				full_fn = df + str(count+1).zfill(2) + ".txt"
 				fil = open(full_fn,"w")
 				encodingCalls(columnNumber, outputGrid, fil)
 				fil.close()
@@ -241,8 +242,25 @@ def main():
 		
 		if outputGrid != []: #for the last grid
 			encodingCalls(columnNumber, outputGrid, fil)
+			count += 1
 		
 		fil.close()
+
+		#start of miniSAT execution
+		grid_list = os.listdir(new_dir)
+		
+		#YOU MUST HAVE MINISAT WORKING ON YOUR COMMAND LINE
+		for i in range(count):
+			try:
+				enc_out = "Grid" + str(i+1).zfill(2) + "_SATencoded.txt"
+				command = "minisat " + grid_list[i] + " " + enc_out
+				
+				os.system(command)
+				os.remove(grid_list[i])
+			except:
+				print grid_list[i] + " not found."
+				print "ERROR"
+				sys.exit()
 		
 if __name__ == "__main__":
 	main() 

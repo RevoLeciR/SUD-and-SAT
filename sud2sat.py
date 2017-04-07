@@ -184,10 +184,11 @@ def main():
 		
 		fldr = raw_input("What folder you like to store all the encoded Sudoku boards? Enter the folder name only. ")
 		par_dir = os.getcwd()
-		new_dir = par_dir + "\\" + fldr
+		#new_dir = par_dir + "\\" + fldr #windows directory style
+		new_dir = par_dir + "/" + fldr #linux directory style
 		if not os.path.exists(new_dir):
 			print "Making new folder " + fldr
-			os.makedirs(new_dir)
+			os.makedirs(fldr)
 		else:
 			print "Folder already exists."
 		
@@ -250,12 +251,16 @@ def main():
 		#YOU MUST HAVE MINISAT WORKING ON YOUR COMMAND LINE
 		for i in range(count):
 			try:
-				enc_out = "Grid " + str(i+1).zfill(2) + "_SATencoded.txt"
+				enc_out = "Grid" + str(i+1).zfill(2) + "_SATencoded.txt"
+				print i+1
 				command = "minisat " + grid_list[i] + " " + enc_out
+				
 				os.system(command)
 				os.remove(grid_list[i])
 			except:
 				print grid_list[i] + " not found."
+				print "ERROR"
+				sys.exit()
 		
 		
 if __name__ == "__main__":
