@@ -17,7 +17,7 @@ samueljohn@shaw.ca
 iamerichedlin@gmail.com
 #### <i class="icon-pencil"></i> Jasmine Yadeta (V00804739)
 jasmine.yadeta@gmail.com
-#### <i class="icon-pencil"></i> Richard Lui (V#)
+#### <i class="icon-pencil"></i> Richard Lui (V00221256)
 luir@uvic.ca
 
 
