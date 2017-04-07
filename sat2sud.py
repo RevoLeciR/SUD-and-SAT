@@ -83,8 +83,8 @@ def main():
 	fldr = raw_input("Enter folder name where SAT encodings: \n")
 	par_dir = os.getcwd()
 	
-	new_dir = par_dir + "\\" + fldr #windows directory style
-	#new_dir = par_dir + "/" + fldr #linux directory style
+	#new_dir = par_dir + "\\" + fldr #windows directory style
+	new_dir = par_dir + "/" + fldr #linux directory style
 	
 	if not os.path.exists(new_dir):
 		print "Folder does not exist. Exiting."
