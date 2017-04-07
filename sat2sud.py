@@ -29,7 +29,6 @@ def solvePuzzle(satExpressions):
 			#print int(x)
 			truths[int(x)-1] = True
 	
-	#print truths
 	'''
 	for i in range(len(truths)):
 		if int(sat_arr[i]) < 0:

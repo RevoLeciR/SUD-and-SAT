@@ -1,6 +1,7 @@
 import sys
 import math
 import time
+import os
 
 def nCr(n,r):
     f = math.factorial
@@ -13,7 +14,7 @@ def returnValueAt(row, column, grid):
 def convertToDecimal(x,y,z, size):
 	return size**2 * (x-1) + size * (y-1)+z
 	
-def eachElementHasAtLeastOneNumber(columnNumber, outputGrid):
+def eachElementHasAtLeastOneNumber(columnNumber, outputGrid, fil):
 	for x in range(1,columnNumber+1): #i
 		for y in range(1,columnNumber+1): #j
 			list = ""
@@ -30,34 +31,39 @@ def eachElementHasAtLeastOneNumber(columnNumber, outputGrid):
 					list = "%s" %(convertToDecimal(x,y,z, columnNumber))
 					occurence = True
 			#print ("%s" %list)
-			print ("%s %s" %(list,0))
+			#print ("%s %s" %(list,0))
+			fil.write("%s %s\n" %(list,0))
 		
-def eachRowHasAtMostOneOfEachNumber(columnNumber, outputGrid):
+def eachRowHasAtMostOneOfEachNumber(columnNumber, outputGrid, fil):
 	for y in range(1,columnNumber+1): #i
 		for z in range(1,columnNumber+1): #k
 			for x in range(1,columnNumber): #j
 				for i in range(x+1,columnNumber+1): #l
 					#print ("-%s -%s" %(convertToDecimal(x,y,z, columnNumber),convertToDecimal(i,y,z, columnNumber)))
-					print ("-%s -%s 0" %(convertToDecimal(x,y,z, columnNumber),convertToDecimal(i,y,z, columnNumber)))
+					#print ("-%s -%s 0" %(convertToDecimal(x,y,z, columnNumber),convertToDecimal(i,y,z, columnNumber)))
+					fil.write("-%s -%s 0\n" %(convertToDecimal(x,y,z, columnNumber),convertToDecimal(i,y,z, columnNumber)))
 
-def eachColumnHasAtMostOneOfEachNumber(columnNumber, outputGrid):
+def eachColumnHasAtMostOneOfEachNumber(columnNumber, outputGrid, fil):
 	for x in range(1,columnNumber+1): #j
 		for z in range(1,columnNumber+1): #k
 			for y in range(1,columnNumber): #i
 				for i in range(y+1,columnNumber+1): #l
-					print ("-%s -%s 0" %(convertToDecimal(x,y,z, columnNumber), convertToDecimal(x,i,z, columnNumber)))
+					#print ("-%s -%s 0" %(convertToDecimal(x,y,z, columnNumber), convertToDecimal(x,i,z, columnNumber)))
+					fil.write("-%s -%s 0\n" %(convertToDecimal(x,y,z, columnNumber), convertToDecimal(x,i,z, columnNumber)))
 			
-def eachNumberAppearsAtMostOncePerGrid(columnNumber, outputGrid):
+def eachNumberAppearsAtMostOncePerGrid(columnNumber, outputGrid, fil):
 	for z in range(1,columnNumber+1): #k
 		for i in range(0,int(math.sqrt(columnNumber))): #a
 			for j in range(0,int(math.sqrt(columnNumber))): #b
 				for x in range(1,int(math.sqrt(columnNumber)+1)): #u
 					for y in range(1,int(math.sqrt(columnNumber)+1)): #v
 						for k in range(y+1,int(math.sqrt(columnNumber)+1)): #w
-							print ("-%s -%s 0"%(convertToDecimal(int(math.sqrt(columnNumber))*i+x,int(math.sqrt(columnNumber))*j+y,z, columnNumber), convertToDecimal(int(math.sqrt(columnNumber))*i+x,int(math.sqrt(columnNumber))*j+k,z, columnNumber)))
+							#print ("-%s -%s 0"%(convertToDecimal(int(math.sqrt(columnNumber))*i+x,int(math.sqrt(columnNumber))*j+y,z, columnNumber), convertToDecimal(int(math.sqrt(columnNumber))*i+x,int(math.sqrt(columnNumber))*j+k,z, columnNumber)))
+							fil.write("-%s -%s 0\n"%(convertToDecimal(int(math.sqrt(columnNumber))*i+x,int(math.sqrt(columnNumber))*j+y,z, columnNumber), convertToDecimal(int(math.sqrt(columnNumber))*i+x,int(math.sqrt(columnNumber))*j+k,z, columnNumber)))
 						for k in range(x+1,int(math.sqrt(columnNumber)+1)): #w
 							for l in range(1,int(math.sqrt(columnNumber))+1): #t
-								print ("-%s -%s 0"%(convertToDecimal(int(math.sqrt(columnNumber))*i+x,int(math.sqrt(columnNumber))*j+y,z, columnNumber), convertToDecimal(int(math.sqrt(columnNumber))*i+k,int(math.sqrt(columnNumber))*j+l,z, columnNumber)))
+								#print ("-%s -%s 0"%(convertToDecimal(int(math.sqrt(columnNumber))*i+x,int(math.sqrt(columnNumber))*j+y,z, columnNumber), convertToDecimal(int(math.sqrt(columnNumber))*i+k,int(math.sqrt(columnNumber))*j+l,z, columnNumber)))
+								fil.write("-%s -%s 0\n"%(convertToDecimal(int(math.sqrt(columnNumber))*i+x,int(math.sqrt(columnNumber))*j+y,z, columnNumber), convertToDecimal(int(math.sqrt(columnNumber))*i+k,int(math.sqrt(columnNumber))*j+l,z, columnNumber)))
 
 # -------------------
 								
@@ -109,29 +115,37 @@ def eachNumberOncePerGrid(columnNumber, outputGrid):
 						list += "%s" %(convertToDecimal(int(math.sqrt(columnNumber))*i+x,int(math.sqrt(columnNumber))*j+y,z, columnNumber))
 				print ("%s %s" %(list,0))
 		
-def encodingCalls(columnNumber, outputGrid):
+def encodingCalls(columnNumber, outputGrid, fil):
 	if(columnNumber != 0):	#not the beginning of the file
 		numclause=(columnNumber*columnNumber*int(math.sqrt(columnNumber))*int(nCr(columnNumber,2))) + (columnNumber*columnNumber)
 		numvar=columnNumber*columnNumber*columnNumber
 		#print ("p cnf %s %s" %(numvar,numclause)) #for minimal encoding clauses
-		exnumclause = (columnNumber*columnNumber*(int(math.sqrt(columnNumber))+1)*int(nCr(columnNumber,2))) + (columnNumber*columnNumber*(int(math.sqrt(columnNumber))+1)) #minimal + extended encodings
-		print ("p cnf %s %s" %(numvar,exnumclause))
+		fil.write("p cnf %s %s\n" %(numvar,numclause))
+		
+		#for extended encoding
+		#exnumclause = (columnNumber*columnNumber*(int(math.sqrt(columnNumber))+1)*int(nCr(columnNumber,2))) + (columnNumber*columnNumber*(int(math.sqrt(columnNumber))+1)) #minimal + extended encodings
+		#print ("p cnf %s %s" %(numvar,exnumclause))
+		#fil.write("p cnf %s %s\n" %(numvar,exnumclause))
 		
 		#print "minimal encoding"
-		eachElementHasAtLeastOneNumber(columnNumber, outputGrid)	
-		eachRowHasAtMostOneOfEachNumber(columnNumber, outputGrid)	
-		eachColumnHasAtMostOneOfEachNumber(columnNumber, outputGrid)
-		eachNumberAppearsAtMostOncePerGrid(columnNumber, outputGrid)
-		
+		eachElementHasAtLeastOneNumber(columnNumber, outputGrid,fil)	
+		eachRowHasAtMostOneOfEachNumber(columnNumber, outputGrid,fil)	
+		eachColumnHasAtMostOneOfEachNumber(columnNumber, outputGrid,fil)
+		eachNumberAppearsAtMostOncePerGrid(columnNumber, outputGrid,fil)
+		fil.close()
+		'''
 		#print "extended encoding"
 		atMostOneNumberInEachEntry(columnNumber, outputGrid)
 		eachNumberOncePerRow(columnNumber, outputGrid)
 		eachNumberOncePerColumn(columnNumber, outputGrid)
 		eachNumberOncePerGrid(columnNumber, outputGrid)
+		'''
 
 def hardInputToSudoku(input):
 	newArr = []
-	nums = ['1','2','3','4','5','6','7','8','9']
+	nums = []
+	for i in range(1,int(math.sqrt(len(input)))+1):
+		nums.append(str(i))
 	
 	for x in range(len(input)):
 		if input[x] not in nums:
@@ -139,18 +153,22 @@ def hardInputToSudoku(input):
 		else:
 			newArr.append(input[x])
 	
-	str = ''.join(newArr)
+	newstr = ''.join(newArr)
 	
 	newGrid = []
 	for x in range(0, len(input), int(math.sqrt(len(input)))):
-		newGrid.append(str[x:x+int(math.sqrt(len(input)))])
+		newGrid.append(newstr[x:x+int(math.sqrt(len(input)))])
 		
 	return newGrid
 
 def main():
 	
 	if len(sys.argv) == 1:
-		print ("No arguments")
+		print "No arguments. Exiting."
+		sys.exit()
+	elif len(sys.argv) > 2:
+		print "Enter only 1 argument. Exiting."
+		sys.exit()
 	else:
 		inputGrid = ""
 		try:
@@ -158,9 +176,19 @@ def main():
 			inputGrid = file.read()
 			file.close()
 		except:
-			print ("Not a valid file")
-			inputGrid = sys.argv[1]
-
+			print "Not a valid file name. Exiting."
+			sys.exit()
+		
+		fldr = raw_input("What folder you like to store all the encoded Sudoku boards? Enter the folder name only. ")
+		par_dir = os.getcwd()
+		new_dir = par_dir + "\\" + fldr
+		if not os.path.exists(new_dir):
+			os.makedirs(new_dir)
+		else:
+			print "Folder already exists."
+		
+		os.chdir(new_dir) #will change the working directory
+		
 		columnNumber = 0
 		outputGrid = []
 		
@@ -173,15 +201,23 @@ def main():
 		
 		if there are other inputs, the for loop below might or might not function
 		'''
+		count = 1
+		df = "Grid"
 		for x in inputGrid.splitlines():
 			if x.startswith('Grid') and boolGrid is False:
+				full_fn = df + str(count).zfill(2) + ".txt"
+				fil = open(full_fn,"w")
 				#print x
 				boolGrid = True
 			elif boolGrid is True and not x.startswith('Grid'):
 				outputGrid.append(x)
 				columnNumber = len(outputGrid[0])
 			elif boolGrid is True and x.startswith('Grid'):
-				encodingCalls(columnNumber, outputGrid)
+				encodingCalls(columnNumber, outputGrid, fil)
+				fil.close()
+				count += 1
+				full_fn = df + str(count).zfill(2) + ".txt"
+				fil = open(full_fn,"w")				
 				#print x
 				outputGrid = []
 				columnNumber = 0
@@ -194,8 +230,11 @@ def main():
 				outputGrid = []
 				columnNumber = 0				
 		
+		
 		if outputGrid != []: #for the last grid
-			encodingCalls(columnNumber, outputGrid) 
+			encodingCalls(columnNumber, outputGrid, fil) 
+		
+		fil.close()
 		
 if __name__ == "__main__":
 	main() 
