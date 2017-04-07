@@ -182,7 +182,7 @@ def main():
 			print "Not a valid file name. Exiting."
 			sys.exit()
 		
-		fldr = raw_input("What folder you like to store all the encoded Sudoku boards? Enter the folder name only. ")
+		fldr = raw_input("What folder you like to store all the encoded Sudoku boards? Enter the folder name only. Enter a name of a folder that does not currently exist in the directory.")
 		par_dir = os.getcwd()
 		#new_dir = par_dir + "\\" + fldr #windows directory style
 		new_dir = par_dir + "/" + fldr #linux directory style
@@ -190,7 +190,8 @@ def main():
 			print "Making new folder " + fldr
 			os.makedirs(fldr)
 		else:
-			print "Folder already exists."
+			print "Folder already exists. Enter another folder name. Exiting."
+			sys.exit()
 		
 		os.chdir(new_dir) #will change the working directory
 		
