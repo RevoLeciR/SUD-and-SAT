@@ -13,7 +13,7 @@ Section: A01
 ## Contact Information
 #### <i class="icon-pencil"></i> Samuel Allegretto-Smith (V00822198)
 samueljohn@shaw.ca
-#### <i class="icon-pencil"></i> Eric Hedlin (V#)
+#### <i class="icon-pencil"></i> Eric Hedlin (V00744896)
 iamerichedlin@gmail.com
 #### <i class="icon-pencil"></i> Jasmine Yadeta (V00804739)
 jasmine.yadeta@gmail.com
