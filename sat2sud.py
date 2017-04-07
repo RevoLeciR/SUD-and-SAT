@@ -121,6 +121,8 @@ def main():
 			fil = open(write_fn, "w")
 			solvePuzzle(inputSat, fil)
 			fil.close()
+		else:
+			print grid_list[i] + " is not a miniSAT encoding."
 	
 if __name__ == "__main__":
 	main() 
