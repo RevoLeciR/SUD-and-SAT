@@ -186,6 +186,7 @@ def main():
 		par_dir = os.getcwd()
 		new_dir = par_dir + "\\" + fldr
 		if not os.path.exists(new_dir):
+			print "Making new folder " + fldr
 			os.makedirs(new_dir)
 		else:
 			print "Folder already exists."
@@ -240,9 +241,22 @@ def main():
 		
 		if outputGrid != []: #for the last grid
 			encodingCalls(columnNumber, outputGrid, fil)
-			count += 1
 		
 		fil.close()
+		
+		#start of miniSAT execution
+		grid_list = os.listdir(new_dir)
+		
+		#YOU MUST HAVE MINISAT WORKING ON YOUR COMMAND LINE
+		for i in range(count):
+			try:
+				enc_out = "Grid " + str(i+1).zfill(2) + "_SATencoded.txt"
+				command = "minisat " + grid_list[i] + " " + enc_out
+				os.system(command)
+				os.remove(grid_list[i])
+			except:
+				print grid_list[i] + " not found."
+		
 		
 if __name__ == "__main__":
 	main() 

@@ -138,10 +138,10 @@ def encodingCalls(columnNumber, outputGrid, fil):
 		eachNumberAppearsAtMostOncePerGrid(columnNumber, outputGrid,fil)
 		
 		#print "extended encoding"
-		atMostOneNumberInEachEntry(columnNumber, outputGrid)
-		eachNumberOncePerRow(columnNumber, outputGrid)
-		eachNumberOncePerColumn(columnNumber, outputGrid)
-		eachNumberOncePerGrid(columnNumber, outputGrid)
+		atMostOneNumberInEachEntry(columnNumber, outputGrid,fil)
+		eachNumberOncePerRow(columnNumber, outputGrid,fil)
+		eachNumberOncePerColumn(columnNumber, outputGrid,fil)
+		eachNumberOncePerGrid(columnNumber, outputGrid,fil)
 
 		fil.close()
 
@@ -234,10 +234,10 @@ def main():
 				encodingCalls(columnNumber, outputGrid, fil)
 				fil.close()
 				count += 1
+				
 				#reset
 				outputGrid = []
-				columnNumber = 0				
-		
+				columnNumber = 0
 		
 		if outputGrid != []: #for the last grid
 			encodingCalls(columnNumber, outputGrid, fil)
