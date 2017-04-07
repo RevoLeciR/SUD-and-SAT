@@ -1,7 +1,8 @@
 import sys
 import math
+import os
 
-def solvePuzzle(satExpressions):
+def solvePuzzle(satExpressions, fil):
 	satExpressions[1] = satExpressions[1].split(' ')
 	size = len(satExpressions[1])-1
 
@@ -57,9 +58,11 @@ def solvePuzzle(satExpressions):
 			
 	#print the solved puzzle		
 	for a in range(size):
-		print (board[a])
+		#print (board[a])
+		fil.write(str(board[a])+"\n")
 
 def main():
+	'''
 	#sat2sud.py takes in the output of the SAT solver as a command line argument
 	if len(sys.argv) == 1:
 		print ("No arguments") #no file given so we exit
@@ -75,6 +78,49 @@ def main():
 		#once a valid file is given solvePuzzle is called to turn the cnf from the SAT to a sudoku	
 		inputSat = inputSat.splitlines()
 		solvePuzzle(inputSat)
+	'''
 		
+	fldr = raw_input("Enter folder name where SAT encodings: \n")
+	par_dir = os.getcwd()
+	
+	new_dir = par_dir + "\\" + fldr #windows directory style
+	#new_dir = par_dir + "/" + fldr #linux directory style
+	
+	if not os.path.exists(new_dir):
+		print "Folder does not exist. Exiting."
+		sys.exit()
+	
+	'''
+	sol_fldr = raw_input("\nEnter a folder name where you like to store the Sudoku solutions. \n")
+	new_sol_dir = par_dir + "\\" + sol_fldr #windows directory style
+	#new_sol_dir = par_dir + "/" + sol_fldr #linux directory style
+	'''
+	
+	os.chdir(new_dir) #change working directory
+	
+	grid_list = os.listdir(new_dir)
+	
+	#sol_fldr = raw_input("\nEnter a folder name where you like to store the Sudoku solutions. \n")
+	
+	pre = "Grid"
+	suf = "_SATencoded.txt"
+	sol = "Solution"
+	for i in range(len(grid_list)):
+		try:
+			file = open(grid_list[i])
+			inputSat = file.read()
+			file.close()
+		except:
+			print "Error finding file " + full_fn
+		
+		inputSat = inputSat.splitlines()
+		#print type(inputSat[0])
+		if inputSat[0] == 'SAT':
+			write_fn = sol + str(i+1).zfill(2) + ".txt"
+			#print write_fn
+			fil = open(write_fn, "w")
+			solvePuzzle(inputSat, fil)
+			fil.close()
+	
 if __name__ == "__main__":
 	main() 
