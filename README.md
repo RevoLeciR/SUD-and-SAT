@@ -15,7 +15,7 @@ Section: A01
 samueljohn@shaw.ca
 #### <i class="icon-pencil"></i> Eric Hedlin (V#)
 iamerichedlin@gmail.com
-#### <i class="icon-pencil"></i> Jasmine Yadeta (V#)
+#### <i class="icon-pencil"></i> Jasmine Yadeta (V00804739)
 jasmine.yadeta@gmail.com
 #### <i class="icon-pencil"></i> Richard Lui (V#)
 luir@uvic.ca
@@ -32,7 +32,7 @@ Sat2Sud.py            |  Reads output produced by miniSAT and converts it back i
 SudokuSatReport.pdf   |  The report and documentation of this project with output and time analysis
 
 ## Execution
-Requires python 2.7.13 or higher and, miniSAT solver
+Requires python 2.7.13 or higher and, miniSAT solver that can be downloaded at http://minisat.se/MiniSat.html
 
 An input of a partially unsolved sudouku puzzle
 
